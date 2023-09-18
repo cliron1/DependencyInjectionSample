@@ -1,0 +1,55 @@
+﻿@using DependencyInjectionSample.Interfaces;
+
+@model DependencyInjectionSample.Services.IOperationService
+
+@inject IOperationTransient _transient
+@inject IOperationScoped _scoped
+@inject IOperationSingleton _singleton
+
+@{
+	ViewData["Title"] = "Dependency Injection Sample";
+}
+
+<div class="row justify-content-center">
+	<div class="col-10">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title">Operations lifetime</h2>
+			</div>
+			<div class="panel-body">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Transient</th>
+							<th>Scoped</th>
+							<th>Singleton</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>Operations from Controller</th>
+							<td>@ViewBag.Transient.OperationId</td>
+							<td>@ViewBag.Scoped.OperationId</td>
+							<td>@ViewBag.Singleton.OperationId</td>
+						</tr>
+						<tr>
+							<th>Operations from View</th>
+							<td>@_transient.OperationId</td>
+							<td>@_scoped.OperationId</td>
+							<td>@_singleton.OperationId</td>
+						</tr>
+						<tr>
+							<th>Operations from Service</th>
+							<td>@Model.TransientOperation.OperationId</td>
+							<td>@Model.ScopedOperation.OperationId</td>
+							<td>@Model.SingletonOperation.OperationId</td>
+						</tr>
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
